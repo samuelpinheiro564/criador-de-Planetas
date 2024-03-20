@@ -1,9 +1,10 @@
 export const user = {
-  name: "Felipe Santos",
-  email: "felipesantos@dev.com",
-  phone: "1999999999",
+  name: "Nickolas Lira",
+  email: "nickolaslira.564@gmail.com",
+  phone: "(19) 999270698",
   address: {
     city: "Valinhos",
     state: "São Paulo",
   },
+  //foto: require("../../assets/nickolas.jpeg"),
 };
