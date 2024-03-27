@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, TouchableOpacity, View, Image } from "react-native";
 
 import styles from "./styles";
 import Title from "../../components/Title";
@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const planetsList = new PlanetRepository();
 
-let planetId = 1; // Inicia o ID do planeta
+let planetId = 1;
 
 export default function Planets() {
   const navigation = useNavigation();
@@ -25,7 +25,8 @@ export default function Planets() {
   const [localizacao, setLocalizacao] = useState("");
   const [comunicacao, setComunicacao] = useState("");
   const [governante, setGovernante] = useState("");
-  const [allPlanets, setAllPlanets] = useState([]); // Corrigir o nome da lista de planetas
+  const [allPlanets, setAllPlanets] = useState([]);
+  const [updateActive, setUpdateActive] = useState(false);
 
   const createPlanet = () => {
     const newPlanet = new Planet(
@@ -50,6 +51,16 @@ export default function Planets() {
     return newPlanet;
   };
 
+  const Delete = (id) => {
+    planetsList.delete(id);
+    setAllPlanets(planetsList.getAll());
+  };
+
+  const Update = (id) => {
+    planetsList.update(id);
+    setAllPlanets(planetsList.getAll());
+  };
+
   const clearInputs = () => {
     setName("");
     setData("");
@@ -66,6 +77,10 @@ export default function Planets() {
   return (
     <View style={styles.container}>
       <Title title="Planets" />
+      <Image
+        source={require("../../../assets/lua.png")}
+        style={styles.backgroundImage}
+      />
 
       <View>
         <TextInput
@@ -129,9 +144,18 @@ export default function Planets() {
           value={governante}
         />
 
-        <TouchableOpacity style={styles.button} onPress={createPlanet}>
-          <Text>Criar Planeta</Text>
-        </TouchableOpacity>
+        {updateActive ? (
+          <TouchableOpacity style={styles.button} onPress={() => Update()}>
+            <Text>Atualizar</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => createPlanet()}
+          >
+            <Text>Adicionar</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       <View>
@@ -139,19 +163,15 @@ export default function Planets() {
           allPlanets.map((planet) => (
             <TouchableOpacity
               key={planet.id}
-              onPress={() => navigation.navigate("Profile", { data: planet })}
+              onPress={() => navigation.navigate("Users", { data: planet })}
             >
-              <Text>{planet.name}</Text>
+              <Text style={styles.planetName}>{planet.name}</Text>
             </TouchableOpacity>
           ))
         ) : (
-          <Text>Não há planetas cadastrados</Text>
+          <Text style={styles.noPlanets}>Não há planetas cadastrados</Text>
         )}
       </View>
-
-      {/* Botões de navegação não foram alterados */}
-      <TouchButton route="Category" title="Go to Category" />
-      <TouchButton route="Profile" title="Go to Profile" data={user} />
     </View>
   );
 }

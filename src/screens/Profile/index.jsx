@@ -4,22 +4,22 @@ import styles from "./styles";
 import Title from "../../components/Title";
 import TouchButton from "../../components/TouchButton";
 
-export default function Profile({ route }) {
-  const { data } = route.params;
-  const foto = data.foto;
-
+export default function Profile() {
   return (
     <View style={styles.container}>
-      <Title title="Profile" />
-
-      <TouchButton route="Home" title="Go to Home" />
-
-      <TouchButton route="Category" title="Go to Category" />
-
-      <View style={styles.user}>
-        <Title title={data.name} />
-        <Text style={styles.text}>{data.email}</Text>
-      </View>
+      <Image
+        source={require("../../../assets/ol.png")}
+        style={styles.backgroundImage}
+      />
+      <Text styles={styles.title}>Nickolas Lira</Text>
+      <Image
+        style={styles.avatar}
+        source={require("../../../assets/avatar.png")}
+      />
+      <Text style={styles.text}>
+        Sou o maior conquistador de planetas que esse universo já viu, então
+        crie esse site para vocês... os meros conquistadores
+      </Text>
     </View>
   );
 }

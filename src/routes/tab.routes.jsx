@@ -7,6 +7,7 @@ import Category from "../screens/Category";
 import Users from "../screens/Users";
 import { user } from "../data/Profile";
 import Planets from "../screens/Planet";
+import { nullPlanet } from "../models/user/NullPlanet";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,17 +49,18 @@ const TabRoutes = () => {
       />
 
       <Tab.Screen
-        name="Category"
-        component={Category}
+        name="Users"
+        component={Users}
+        initialParams={{ data: nullPlanet }}
         options={{
           tabBarIcon: ({ focused }) => (
             <Feather
-              name="list"
+              name="user"
               size={24}
               color={focused ? "#131313" : "#D6D6D6"}
             />
           ),
-          tabBarLabel: "Categorias",
+          tabBarLabel: "Planetas Registrados",
           tabBarActiveTintColor: "#131313",
           tabBarInactiveTintColor: "#D6D6D6",
         }}
