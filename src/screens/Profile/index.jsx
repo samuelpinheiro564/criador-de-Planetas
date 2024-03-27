@@ -8,7 +8,7 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../../assets/ol.png")}
+        source={require("../../../assets/lua.png")}
         style={styles.backgroundImage}
       />
       <Text styles={styles.title}>Nickolas Lira</Text>

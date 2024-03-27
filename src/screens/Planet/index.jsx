@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View, Image } from "react-native";
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 
 import styles from "./styles";
 import Title from "../../components/Title";
@@ -75,103 +82,105 @@ export default function Planets() {
   };
 
   return (
-    <View style={styles.container}>
-      <Title title="Planets" />
-      <Image
-        source={require("../../../assets/lua.png")}
-        style={styles.backgroundImage}
-      />
-
-      <View>
-        <TextInput
-          placeholder="Digite o nome do seu planeta"
-          style={styles.userInput}
-          onChangeText={setName}
-          value={name}
-        />
-        <TextInput
-          placeholder="Digite a data do seu planeta"
-          style={styles.userInput}
-          onChangeText={setData}
-          value={data}
-        />
-        <TextInput
-          placeholder="Digite a cor primária"
-          style={styles.userInput}
-          onChangeText={setCor1}
-          value={cor1}
-        />
-        <TextInput
-          placeholder="Digite a cor secundária"
-          style={styles.userInput}
-          onChangeText={setCor2}
-          value={cor2}
-        />
-        <TextInput
-          placeholder="Digite a população"
-          style={styles.userInput}
-          onChangeText={setPopulacao}
-          value={populacao}
-        />
-        <TextInput
-          placeholder="Digite a composição natural"
-          style={styles.userInput}
-          onChangeText={setNatural}
-          value={natural}
-        />
-        <TextInput
-          placeholder="Digite o número de humanos"
-          style={styles.userInput}
-          onChangeText={setHumans}
-          value={humans}
-        />
-        <TextInput
-          placeholder="Digite a localização"
-          style={styles.userInput}
-          onChangeText={setLocalizacao}
-          value={localizacao}
-        />
-        <TextInput
-          placeholder="Digite o tipo de comunicação"
-          style={styles.userInput}
-          onChangeText={setComunicacao}
-          value={comunicacao}
-        />
-        <TextInput
-          placeholder="Digite o governante"
-          style={styles.userInput}
-          onChangeText={setGovernante}
-          value={governante}
+    <ScrollView>
+      <View style={styles.container}>
+        <Title title="Planets" />
+        <Image
+          source={require("../../../assets/criação.jpg")}
+          style={styles.backgroundImage}
         />
 
-        {updateActive ? (
-          <TouchableOpacity style={styles.button} onPress={() => Update()}>
-            <Text>Atualizar</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => createPlanet()}
-          >
-            <Text>Adicionar</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+        <View>
+          <TextInput
+            placeholder="Digite o nome do seu planeta"
+            style={styles.userInput}
+            onChangeText={setName}
+            value={name}
+          />
+          <TextInput
+            placeholder="Digite a data do seu planeta"
+            style={styles.userInput}
+            onChangeText={setData}
+            value={data}
+          />
+          <TextInput
+            placeholder="Digite a cor primária"
+            style={styles.userInput}
+            onChangeText={setCor1}
+            value={cor1}
+          />
+          <TextInput
+            placeholder="Digite a cor secundária"
+            style={styles.userInput}
+            onChangeText={setCor2}
+            value={cor2}
+          />
+          <TextInput
+            placeholder="Digite a população"
+            style={styles.userInput}
+            onChangeText={setPopulacao}
+            value={populacao}
+          />
+          <TextInput
+            placeholder="Digite a composição natural"
+            style={styles.userInput}
+            onChangeText={setNatural}
+            value={natural}
+          />
+          <TextInput
+            placeholder="Digite o número de humanos"
+            style={styles.userInput}
+            onChangeText={setHumans}
+            value={humans}
+          />
+          <TextInput
+            placeholder="Digite a localização"
+            style={styles.userInput}
+            onChangeText={setLocalizacao}
+            value={localizacao}
+          />
+          <TextInput
+            placeholder="Digite o tipo de comunicação"
+            style={styles.userInput}
+            onChangeText={setComunicacao}
+            value={comunicacao}
+          />
+          <TextInput
+            placeholder="Digite o governante"
+            style={styles.userInput}
+            onChangeText={setGovernante}
+            value={governante}
+          />
 
-      <View>
-        {allPlanets.length > 0 ? (
-          allPlanets.map((planet) => (
-            <TouchableOpacity
-              key={planet.id}
-              onPress={() => navigation.navigate("Users", { data: planet })}
-            >
-              <Text style={styles.planetName}>{planet.name}</Text>
+          {updateActive ? (
+            <TouchableOpacity style={styles.button} onPress={() => Update()}>
+              <Text>Atualizar</Text>
             </TouchableOpacity>
-          ))
-        ) : (
-          <Text style={styles.noPlanets}>Não há planetas cadastrados</Text>
-        )}
+          ) : (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => createPlanet()}
+            >
+              <Text>Adicionar</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        <View>
+          {allPlanets.length > 0 ? (
+            allPlanets.map((planet) => (
+              <TouchableOpacity
+                key={planet.id}
+                onPress={() => navigation.navigate("Users", { data: planet })}
+              >
+                <Text style={styles.planetName}>{planet.name}</Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text style={styles.noPlanets}>Não há planetas cadastrados</Text>
+          )}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
