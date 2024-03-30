@@ -19,11 +19,12 @@ const planetsList = new PlanetRepository();
 
 let planetId = 1;
 
-export default function Planets() {
+export default function Planets( route) {
+  const { data } = route.params;
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
-  const [data, setData] = useState("");
+  const [date, setdate] = useState("");
   const [cor1, setCor1] = useState("");
   const [cor2, setCor2] = useState("");
   const [populacao, setPopulacao] = useState("");
@@ -35,11 +36,26 @@ export default function Planets() {
   const [allPlanets, setAllPlanets] = useState([]);
   const [updateActive, setUpdateActive] = useState(false);
 
+  if (data) {
+    setName(data.name);
+    setdate(data.date);
+    setCor1(data.cor1);
+    setCor2(data.cor2);
+    setPopulacao(data.populacao);
+    setNatural(data.natural);
+    setHumans(data.humans);
+    setLocalizacao(data.localizacao);
+    setComunicacao(data.comunicacao);
+    setGovernante(data.governante);
+    setUpdateActive(true);
+  }
+
+
   const createPlanet = () => {
     const newPlanet = new Planet(
       planetId++,
       name,
-      data,
+      date,
       cor1,
       cor2,
       populacao,
@@ -70,7 +86,7 @@ export default function Planets() {
 
   const clearInputs = () => {
     setName("");
-    setData("");
+    setdate("");
     setCor1("");
     setCor2("");
     setPopulacao("");
@@ -98,10 +114,10 @@ export default function Planets() {
             value={name}
           />
           <TextInput
-            placeholder="Digite a data do seu planeta"
+            placeholder="Digite a date do seu planeta"
             style={styles.userInput}
-            onChangeText={setData}
-            value={data}
+            onChangeText={setdate}
+            value={date}
           />
           <TextInput
             placeholder="Digite a cor primária"
@@ -171,7 +187,7 @@ export default function Planets() {
             allPlanets.map((planet) => (
               <TouchableOpacity
                 key={planet.id}
-                onPress={() => navigation.navigate("Users", { data: planet })}
+                onPress={() => navigation.navigate("Users", { date: planet })}
               >
                 <Text style={styles.planetName}>{planet.name}</Text>
               </TouchableOpacity>
