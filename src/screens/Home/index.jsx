@@ -17,7 +17,13 @@ export default function Home() {
         seus próprios planetas ou apenas navegue pelas maravilhas do espaço!
       </Text>
 
-      <TouchButton route="Planets" title="Go to Planet" />
+     <TouchableOpacity onPress={navigation.navigate('Planets', { data: item })}>
+      <Text>Lista Planetas</Text>
+     </TouchableOpacity>
+      <TouchButton route="Profile" title="Conheca o Conquistador" />
+      <TouchButton route="ListaPlanetas" title="Lista de Planetas" />
+      <TouchButton route="category" title="Go to Planet" />
+      <TouchButton route="Cadastrar" title="Cadastre Novo Planeta" />
     </View>
   );
 }

@@ -20,7 +20,6 @@ const planetsList = new PlanetRepository();
 let planetId = 1;
 
 export default function Planets( route) {
-  const { data } = route.params;
   const navigation = useNavigation();
 
   const [name, setName] = useState("");

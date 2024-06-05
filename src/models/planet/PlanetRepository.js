@@ -1,52 +1,45 @@
+import planetsData from "../../data/Planetas";
+
+// PlanetasRepository.js
 export default class PlanetasRepository {
   constructor() {
     this.planets = [];
   }
 
+  // Retorna todos os planetas
   getAll() {
     return this.planets;
   }
 
+  // Retorna um planeta pelo ID
   get(id) {
     return this.planets.find((planet) => planet.id === id);
   }
 
+  // Adiciona um novo planeta ao repositório
   add(planet) {
     this.planets.push(planet);
   }
 
+  // Remove um planeta pelo ID
   remove(id) {
     this.planets = this.planets.filter((planet) => planet.id !== id);
   }
 
-  update(
-    id,
-    name,
-    data,
-    cor1,
-    cor2,
-    populacao,
-    natural,
-    humans,
-    localizacao,
-    comunicacao,
-    governante
-  ) {
-    const planet = this.get(id);
-
-    if (planet) {
-      planet.id = id;
-      planet.name = name;
-      planet.data = data;
-      planet.cor1 = cor1;
-      planet.cor2 = cor2;
-      planet.populacao = populacao;
-      planet.natural = natural;
-      planet.humans = humans;
-      planet.localizacao = localizacao;
-      planet.comunicacao = comunicacao;
-      planet.governante = governante;
+  // Atualiza os detalhes de um planeta existente
+  update(id, updatedPlanet) {
+    const index = this.planets.findIndex((planet) => planet.id === id);
+    if (index !== -1) {
+      this.planets[index] = updatedPlanet;
+      return this.planets[index];
     }
-    return planet;
+    return null;
+  }
+
+  // Inicializa o repositório com dados mocados usando o método add
+  initializeMockData(planetsData) {
+    planetsData.forEach(planet => {
+      this.add(planet);
+    });
   }
 }

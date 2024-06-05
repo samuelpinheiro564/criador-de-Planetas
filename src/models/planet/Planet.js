@@ -6,8 +6,6 @@ export default class Planet {
     cor1,
     cor2,
     populacao,
-    natural,
-    humans,
     localizacao,
     comunicacao,
     governante
@@ -18,8 +16,6 @@ export default class Planet {
     this.cor1 = cor1;
     this.cor2 = cor2;
     this.populacao = populacao;
-    this.natural = natural;
-    this.humans = humans;
     this.localizacao = localizacao;
     this.comunicacao = comunicacao;
     this.governante = governante;
