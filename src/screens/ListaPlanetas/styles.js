@@ -1,66 +1,46 @@
-// styles.js
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+ const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: '#fff',
+    padding: 20,
+    backgroundColor: '#f5f5f5',
   },
-  backgroundImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  title: {
+  tit: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 20,
-  },
-  planet: {
+    color: '#333',
     marginBottom: 20,
-  },
-  planetName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  planetData: {
-    fontSize: 16,
-  },
-  planetCor1: {
-    fontSize: 16,
-  },
-  planetCor2: {
-    fontSize: 16,
-  },
-  planetPopulacao: {
-    fontSize: 16,
-  },
-  planetNatural: {
-    fontSize: 16,
-  },
-  planetHumans: {
-    fontSize: 16,
-  },
-  planetLocalizacao: {
-    fontSize: 16,
-  },
-  planetComunicacao: {
-    fontSize: 16,
-  },
-  planetGovernante: {
-    fontSize: 16,
-  },
-  planetButton: {
-    fontSize: 18,
-    color: 'blue',
     textAlign: 'center',
-    marginVertical: 10,
   },
-});
+  help: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  help1: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+  },
+  text: {
+    fontSize: 18,
+    color: '#333',
+  },
+  textbotton: {
+    fontSize: 1,
+    color: 'Blue',
+  },
 
+});
 export default styles;

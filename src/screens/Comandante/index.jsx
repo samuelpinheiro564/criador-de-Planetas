@@ -4,7 +4,7 @@ import styles from "./styles";
 import Title from "../../components/Title";
 import TouchButton from "../../components/TouchButton";
 
-export default function Profile() {
+export default function Comandante() {
   return (
     <View style={styles.container}>
       <Image

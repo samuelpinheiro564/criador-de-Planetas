@@ -1,45 +1,40 @@
-import planetsData from "../../data/Planetas";
+import { planeta } from "../../data/Planetas";
+import Planeta from "./Planet";
 
-// PlanetasRepository.js
-export default class PlanetasRepository {
+ class PlanetasRepository {
   constructor() {
-    this.planets = [];
-  }
-
-  // Retorna todos os planetas
+    this.planetas = [];
+  };
   getAll() {
-    return this.planets;
+    return this.planetas;
   }
-
-  // Retorna um planeta pelo ID
   get(id) {
-    return this.planets.find((planet) => planet.id === id);
+    return this.planetas.find((planeta) => planeta.id === id);
+  }
+  add(planeta) {
+    this.planetas.push(planeta);
   }
 
-  // Adiciona um novo planeta ao repositório
-  add(planet) {
-    this.planets.push(planet);
-  }
-
-  // Remove um planeta pelo ID
   remove(id) {
-    this.planets = this.planets.filter((planet) => planet.id !== id);
+    this.planetas = this.planetas.filter((planeta) => planeta.id !== id);
   }
 
-  // Atualiza os detalhes de um planeta existente
-  update(id, updatedPlanet) {
-    const index = this.planets.findIndex((planet) => planet.id === id);
-    if (index !== -1) {
-      this.planets[index] = updatedPlanet;
-      return this.planets[index];
+  update(id,name,data, cor1, cor2, populacao, localizacao, comunicacao, governante) {
+    const planeta = this.get(id)
+    if (planeta) {
+   planeta.name = name;
+    planeta.data = data;
+    planeta.cor1 = cor1;
+    planeta.cor2 = cor2;
+    planeta.populacao = populacao;
+    planeta.localizacao = localizacao;
+    planeta.comunicacao = comunicacao;
+    planeta.governante = governante;
     }
-    return null;
-  }
-
-  // Inicializa o repositório com dados mocados usando o método add
-  initializeMockData(planetsData) {
-    planetsData.forEach(planet => {
-      this.add(planet);
-    });
+    return planeta;
   }
 }
+const planetasRepository = new PlanetasRepository();
+planetasRepository.add(new Planeta(planeta.name, planeta.data, planeta.cor1, planeta.cor2, planeta.populacao, planeta.localizacao, planeta.comunicacao, planeta.governante));
+
+export default planetasRepository;

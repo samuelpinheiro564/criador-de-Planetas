@@ -1,70 +1,55 @@
-// DetalhesDoPlaneta.js
-import React from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, View,ImageBackground,ScrollView} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const DetalhesDoPlaneta = ({ route, navigation }) => {
-  const { planet } = route.params;
+import styles from "./styles";
 
-  const handleEdit = () => {
-    navigation.navigate('EditPlanet', { planet });
+import planetasRepository from "../../models/planet/PlanetRepository";
+
+export default function Descricao({ route }) {
+  const navigation = useNavigation();
+  const { data } = route.params;
+
+  const editPlanet = () => {
+    navigation.navigate("Formulario", { planet: data, edit: true });
+
   };
 
-  const handleBackToList = () => {
-    navigation.navigate('ListaPlanetas',{planet});
+  const deletePlanet = () => {
+    planetasRepository.remove(data.id);
+    navigation.navigate("ListaPlanetas");
   };
 
   return (
     <ScrollView>
+   <ImageBackground source={require("../../../assets/lua.png")} style={styles.image}>
     <View style={styles.container}>
-      <Text style={styles.label}>Nome:</Text>
-      <Text style={styles.text}>{planet.name}</Text>
 
-      <Text style={styles.label}>Data:</Text>
-      <Text style={styles.text}>{planet.data}</Text>
+      {data ? (
+        <Text style={styles.tit}>Detalhes do Planeta</Text>
+      ) : (
+        <Text  style={styles.tit}>Selecione um Planeta para exibir seus detalhes</Text>
+      )}
 
-      <Text style={styles.label}>Cor 1:</Text>
-      <Text style={styles.text}>{planet.cor1}</Text>
+          <Text  style={styles.tit}>{data.name}</Text>          
+          <Text  style={styles.text}>{data.data}</Text>         
+          <Text  style={styles.text}>{data.cor1}</Text>    
+          <Text  style={styles.text}>{data.cor2}</Text>
+          <Text style={styles.text}>{data.populacao}</Text>
+          <Text style={styles.text}>{data.localizacao}</Text>
+          <Text style={styles.text}>{data.comunicacao}</Text>
+          <Text style={styles.text}>{data.governante}</Text>
 
-      <Text style={styles.label}>Cor 2:</Text>
-      <Text style={styles.text}>{planet.cor2}</Text>
+        </View>
 
-      <Text style={styles.label}>População:</Text>
-      <Text style={styles.text}>{planet.populacao}</Text>
-
-      <Text style={styles.label}>Natural:</Text>
-      <Text style={styles.text}>{planet.natural ? 'Sim' : 'Não'}</Text>
-
-      <Text style={styles.label}>Humanos:</Text>
-      <Text style={styles.text}>{planet.humans ? 'Sim' : 'Não'}</Text>
-
-      <Text style={styles.label}>Localização:</Text>
-      <Text style={styles.text}>{planet.localizacao}</Text>
-
-      <Text style={styles.label}>Comunicação:</Text>
-      <Text style={styles.text}>{planet.comunicacao}</Text>
-
-      <Button title="Editar" onPress={handleEdit} />
-      <Button title="Voltar para a lista" onPress={handleBackToList} />
-    </View>
+        <View style={styles.help}>
+          <TouchableOpacity style={styles.botton} onPress={editPlanet}>
+            <Text   style={styles.textbotton}>Editar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.Excluirbotton} onPress={deletePlanet}>
+            <Text    style={styles.textbotton}>Excluir</Text>
+          </TouchableOpacity>
+        </View>
+        </ImageBackground>
     </ScrollView>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 5,
-    fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 15,
-  },
-});
-
-export default DetalhesDoPlaneta;
+}

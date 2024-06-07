@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
     padding: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -42,13 +41,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
   },
-  backgroundImage: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    backgoundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  },
+
 });
 
 export default styles;

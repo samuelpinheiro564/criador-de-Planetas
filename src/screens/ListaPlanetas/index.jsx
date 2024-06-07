@@ -1,69 +1,53 @@
-// ListaPlanetas.js
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import PlanetasRepository from '../../models/planet/PlanetRepository'; // Importe o PlanetasRepository
-import planetsData from '../../data/Planetas';
+// PlanetListScreen.js
+import React, { useState, useEffect } from 'react';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { View, Text,ScrollView,TouchableOpacity } from 'react-native';
+import planetasRepository from '../../models/planet/PlanetRepository';
+import styles from './styles';
 
-const planetasRepository = new PlanetasRepository();
-planetasRepository.initializeMockData(planetsData);
-const ListaPlanetas = ({ navigation }) => {
-  const planets = planetasRepository.getAll(); // Obtenha todos os planetas do repositório
+export default function ListaPlanetas() {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+  const [todosUsuarios, setTodosUsuarios] = useState([]);
 
+  useEffect(() => {
+    if (isFocused) {
+      const planets = planetasRepository.getAll();
+      setTodosUsuarios(planets);
+    }
+  }, [isFocused]);
+console.log("todosUsuarios",todosUsuarios)
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Lista de Planetas</Text>
-      <View style={styles.planetsContainer}>
-        {planets.map(planet => (
-          <TouchableOpacity
-            key={planet.id}
-            onPress={() => navigation.navigate('EditPlanet', { planet })}
-            style={styles.planetCard}
-          >
-            <Text style={styles.planetName}>{planet.name}</Text>
-            <Text>Data: {planet.data}</Text>
-            <Text>Cor 1: {planet.cor1}</Text>
-            <Text>Cor 2: {planet.cor2}</Text>
-            <Text>População: {planet.populacao}</Text>
-            <Text>Natural: {planet.natural ? 'Sim' : 'Não'}</Text>
-            <Text>Humanos: {planet.humans ? 'Sim' : 'Não'}</Text>
-            <Text>Localização: {planet.localizacao}</Text>
-            <Text>Comunicação: {planet.comunicacao}</Text>
-            <Text>Governante: {planet.governante}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+    <ScrollView>
+    
+    <View style={styles.container}>
+      <Text  style={styles.tit}>Lista de Planetas:</Text>
+
+      {todosUsuarios.length > 0 ? (
+        <View style={styles.help} >
+          {todosUsuarios.map((planet) => (
+            <View style={styles.help1} key={planet.id} >
+              <View >
+              <TouchableOpacity
+                style={styles.botton}
+                  onPress={() => navigation.navigate("DetalhesPlanets", { data: planet })}
+                >
+                <Text style={styles.text}>{planet.name}</Text>
+                </TouchableOpacity>
+              </View>
+             
+            </View>
+          ))}
+        </View>
+        
+      
+      ) : (
+        
+        <Text style={styles.tit}>Nenhum planeta cadastrado</Text>
+      
+      )}
+    </View>
+   
     </ScrollView>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  planetsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  planetCard: {
-    width: '48%',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginBottom: 10,
-  },
-  planetName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-});
-
-export default ListaPlanetas;
+}
